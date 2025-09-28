@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: goatbot-v2
+    env: node
+    region: oregon   # or singapore for better ping in BD
+    plan: free       # can change to starter/pro later
+    buildCommand: |
+      npm install
+    startCommand: |
+      npm start
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      # Add your GoatBot config here
+      - key: DATABASE_URL
+        sync: false
+      - key: FB_EMAIL
+        sync: false
+      - key: FB_PASSWORD
+        sync: false
+      - key: FB_APPSTATE
+        sync: false
+
+databases:
+  - name: goatbot-db
+    plan: free
+    region: oregon
